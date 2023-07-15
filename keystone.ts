@@ -6,6 +6,9 @@ import {
 } from '@keystone-next/keystone/session';
 import 'dotenv/config';
 
+import { User } from './schemas/User';
+import { Product } from './schemas/Product';
+
 const databaseURL =
   process.env.DATABASE_URL || 'mongodb://localhost/keystone-nile-local';
 
@@ -40,6 +43,7 @@ export default withAuth(
     lists: createSchema({
       // TODO: Add schema items here
       User,
+      Product,
     }),
     ui: {
       // Show UI only if session available and logged in
