@@ -5,6 +5,7 @@ function timestamp() {
   return new Date(stampy).toISOString();
 }
 
+// TODO: update seed data to be relevant to Nile
 export const products = [
   {
     name: 'Yeti Hondo',

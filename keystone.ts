@@ -8,6 +8,8 @@ import 'dotenv/config';
 
 import { User } from './schemas/User';
 import { Product } from './schemas/Product';
+import { ProductImage } from './schemas/ProductImage';
+import { insertSeedData } from './seed-data';
 
 const databaseURL =
   process.env.DATABASE_URL || 'mongodb://localhost/keystone-nile-local';
@@ -39,11 +41,18 @@ export default withAuth(
       adapter: 'mongoose',
       url: databaseURL,
       // TODO: Add data seeding here
+      async onConnect(keystone) {
+        console.log('Connected to db successfully.');
+        if (process.argv.includes('--seed-data')) {
+          await insertSeedData(keystone); // invoked by "npm run seed-data"
+        }
+      },
     },
     lists: createSchema({
       // TODO: Add schema items here
       User,
       Product,
+      ProductImage,
     }),
     ui: {
       // Show UI only if session available and logged in
